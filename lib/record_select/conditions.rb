@@ -32,7 +32,7 @@ module RecordSelect
       if params[:search] and !params[:search].strip.empty?
         tokens = params[:search].strip.split(' ')
 
-        where_clauses = record_select_config.search_on.collect { |sql| "#{sql} LIKE ?" }
+        where_clauses = record_select_config.search_on.collect { |sql| "#{sql} ILIKE ?" }
         phrase = "(#{where_clauses.join(' OR ')})"
 
         sql = ([phrase] * tokens.length).join(' AND ')
